@@ -18,14 +18,26 @@ http://codekata.com/
 - C++
 - CMake
 
+build command:
+``` docker-compose exec dev cmake ..```
+``` docker-compose exec dev make```
+
+execute command:
+``` docker-compose exec dev src/my_app```
+
 ## CODING STYLE
 以下 "Google C++ Stype Guide" に従うものとする
 https://google.github.io/styleguide/cppguide.html
 
-## LINT TOOL USAGE
-以下コマンドで実行可能
-- ``` cpplint <filename>```
-- ex: ``` docker-compose exec dev cpplint ../src/main.cc ```
+### LINT TOOL USAGE
+- Cpplintを使用。以下コマンドで実行可能
+``` cpplint <filename>```
+ex: ``` docker-compose exec dev cpplint ../src/main.cc ```
 
 ## TESTS
 - デザインパターン学習の優先度が高いため、テストコード＆テストケースの実装はしなくても良いものとする
+
+### UNIT TEST TOOL
+Google Testを使用。以下のコマンドで実行可能
+``` ctest --verbose```
+ex: ``` docker-compose exec dev ctest --verbose```
