@@ -12,12 +12,6 @@ jobs:
      - name: Setup python
        uses: actions/setup-python@v2
 
-     - name: Setup apt-get
-       run: |
-         sudo apt-get update -y \
-         && sudo apt-get upgrade -y \
-         && sudo apt-get install -yq libboost1.65-dev
-
      - name: Setup lint
        run: |
          pip3 install cpplint
