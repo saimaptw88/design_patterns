@@ -35,7 +35,9 @@ jobs:
      - name: Build
        run: |
          mkdir build \
-         && cmake --build build/
+         && cd build \
+         && cmake .. \
+         && make
 
      - name: Cpp Lint
        run: |
