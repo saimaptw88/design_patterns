@@ -2,12 +2,15 @@ set(GTEST_ROOT /usr/local/)
 include_directories(${GTEST_ROOT}/include/)
 link_directories(${GTEST_ROOT}/lib/)
 
-file(GLOB SOURCES "/design_pattern/test/*_test.cc")
-add_executable(my_test ${SOURCES})
+add_executable(
+my_test
+${CMAKE_CURRENT_SOURCE_DIR}/sample_test.cc
+)
+
 target_link_libraries(
 my_test
 sample
-gtest
 gtest_main
+gtest
 pthread
 )

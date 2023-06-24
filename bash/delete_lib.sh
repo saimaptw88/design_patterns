@@ -19,7 +19,7 @@ rm -rf $HOME_DIR/src/$LIB_NAME
 # Delete line from $HOME_DIR/src/CMakeLists.txt
 FILE="$HOME_DIR/src/CMakeLists.txt"
 sed -i -e "/add_subdirectory($LIB_NAME)/d" $FILE
-sed -i -e "/mod/d" $FILE
+sed -i -e "/$LIB_NAME/d" $FILE
 
 # Delete line from $HOME_DIR/test/CMakeLists.txt
 FILE=$HOME_DIR/test/CMakeLists.txt

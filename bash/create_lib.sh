@@ -97,4 +97,5 @@ sed -i -e "/$INSERTED_TEXT/a $LIB_NAME" $FILE
 
 # add to $HOME_DIR/test/CMakeLists.txt
 FILE="$HOME_DIR/test/CMakeLists.txt"
-sed -i -e "8a $LIB_NAME" $FILE
+sed -i -e "/gtest_main/i $LIB_NAME" $FILE
+sed -i -e '6a ${CMAKE_CURRENT_SOURCE_DIR}/'"$TEST_FILE_NAME.cc" $FILE
