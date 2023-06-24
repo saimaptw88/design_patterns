@@ -1,0 +1,7 @@
+# Lint tool
+cpplint
+
+# For documentation
+breathe==4.34.0
+sphinx==4.5.0
+sphinx_book_theme

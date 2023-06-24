@@ -1,0 +1,12 @@
+version: '3.3'
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: Docker/Dockerfile
+    volumes:
+      - type: bind
+        source: .
+        target: /design_pattern
+    tty: true
+    working_dir: /design_pattern/build
