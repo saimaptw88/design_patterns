@@ -8,8 +8,8 @@ fi
 
 # handle command line argument
 LIB_NAME=$1
-UPPER_NAME=`echo $1 | tr '[a-z]' '[A-Z]'`
-TEST_NAME=$1"_"test
+UPPER_LIB_NAME=`echo $1 | tr '[a-z]' '[A-Z]'`
+TEST_FILE_NAME=$1"_"test
 HOME_DIR=/design_pattern
 NEW_DIR="$HOME_DIR/src/$LIB_NAME"
 NEW_TEST_DIR="$HOME_DIR/test"
@@ -26,12 +26,17 @@ fi
 CMAKE_FILE="$NEW_DIR/CMakeLists.txt"
 CC_FILE="$NEW_DIR/$LIB_NAME.cc"
 HH_FILE="$NEW_DIR/$LIB_NAME.hh"
-TEST_FILE=$NEW_TEST_DIR/$TEST_NAME.cc
+TEST_FILE=$NEW_TEST_DIR/$TEST_FILE_NAME.cc
 
 touch $CMAKE_FILE
 touch $CC_FILE
 touch $HH_FILE
 touch $TEST_FILE
+
+# Changable valiables
+TEXT=""
+FILE=""
+INSERTED_TEXT=""
 
 # Create CMakeTexts.txt
 GTEST_ROOT='${GTEST_ROOT}'
@@ -42,7 +47,7 @@ TEXT="add_library($LIB_NAME SHARED $LIB_NAME.cc)"
 echo "$TEXT" > $CMAKE_FILE
 
 # Create $NAME.hh
-GUARD=SRC_$UPPER_NAME"_"$UPPER_NAME"_HH_"
+GUARD=SRC_$UPPER_LIB_NAME"_"$UPPER_LIB_NAME"_HH_"
 
 TEXT="// Copyright $(date +%Y) saito
 #ifndef $GUARD
