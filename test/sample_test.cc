@@ -1,8 +1,7 @@
 // Copyright 2023 @saito
 #include <gtest/gtest.h>
 
-#include "../src/sample.hh"
-#include "../src/sample.cc"  // NOLINT
+#include "../src/sample/sample.hh"
 
 
 namespace SampleTest {

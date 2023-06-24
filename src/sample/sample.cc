@@ -1,5 +1,5 @@
 // Copyright 2023 @saito
-#include "../src/sample.hh"
+#include "../../src/sample/sample.hh"
 
 
 namespace Sample {

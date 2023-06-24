@@ -3,7 +3,7 @@
 
 #include <boost/array.hpp>
 
-#include "../src/sample.hh"
+#include "../src/sample/sample.hh"
 
 
 int main() {
