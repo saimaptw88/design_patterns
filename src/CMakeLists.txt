@@ -3,6 +3,6 @@ cmake_minimum_required(VERSION 3.10)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 
-add_executable(my_app main.cc)
+add_executable(my_app main.cc sample.hh sample.cc)
 set(THREADS_PREFER_PTHREAD_FLAG ON)
 find_package(Threads REQUIRED)
