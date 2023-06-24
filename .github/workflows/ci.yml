@@ -16,7 +16,7 @@ jobs:
        run: |
          sudo apt-get update -y \
          && sudo apt-get upgrade -y \
-         && sudo apt-get install -y wget
+         && sudo apt-get install -yq libboost1.65-dev
 
      - name: Setup lint
        run: |
@@ -44,12 +44,32 @@ jobs:
          && ./bootstrap.sh --prefix=/usr/local \
          && ./b2 install
 
-     - name: Build
+     - name: Cache boost
+       uses: actions/cache@v1.0.3
+       id: cache-boost
+       with:
+         path: "~/boost"
+         key: libboost-all-dev
+     - name: Install boost
+       env:
+         CACHE_HIT: ${{steps.cache-boost.outputs.cache-hit}}
+       run:
+         if [[ "$CACHE_HIT == 'true' "]]; then
+           sudo cp --force --recursive ~/boost/* /
+         else
+           sudo apt-get update && sudo apt-get install -y libboost-all-dev
+           mkdir -p ~/boost
+           for dep in libboost-all-dev; do
+             dpkg -L $dep | while IFS= read -r f; do if test -f $f; then echo $f; fi; done | xargs cp --parents --target-directory ~/boost/
+           done
+         fi
+
+     - name: Cmake
        run: |
          mkdir build \
-         && cd build \
-         && cmake .. \
-         && make
+         && cmake --build build/ --target all \
+       env:
+         MAKEFLAGS: "-j2"
 
      - name: Cpp Lint
        run: |
