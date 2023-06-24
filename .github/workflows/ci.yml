@@ -12,11 +12,11 @@ jobs:
      - name: Setup python
        uses: actions/setup-python@v2
 
-     - name: Setup boost
+     - name: Setup apt-get
        run: |
          apt-get update -y \
          && apt-get upgrade -y \
-         && apt-get install -y libboost-all-dev
+         && apt-get install -y wget
 
      - name: Setup lint
        run: |
@@ -33,6 +33,16 @@ jobs:
          && cmake .. \
          && make \
          && sudo make install
+
+     - name: Setup Boost
+       run: |
+         BOOST_VERSION=1.82.0
+         BOOST_VERSION_MOD=$(echo $BOOST_VERSION | tr . _) \
+         && wget https://boostorg.jfrog.io/artifactory/main/release/${BOOST_VERSION}/source/boost_${BOOST_VERSION_MOD}.tar.bz2 \
+         && tar --bzip2 -xf boost_${BOOST_VERSION_MOD}.tar.bz2 \
+         && cd boost_${BOOST_VERSION_MOD} \
+         && ./bootstrap.sh --prefix=/usr/local \
+         && ./b2 install
 
      - name: Build
        run: |
