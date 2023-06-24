@@ -28,15 +28,14 @@ jobs:
          && make \
          && sudo make install
 
+     # TODO: Setup cache to speed up ci
      - name: Install boost
        run: sudo apt-get update && sudo apt-get install -yq libboost-all-dev
 
-     - name: CMake
+     - name: Build
        run: |
          mkdir build \
-         && cmake --build build/ --target all
-       env:
-         MAKEFLAGS: "-j2"
+         && cmake --build build/
 
      - name: Cpp Lint
        run: |
