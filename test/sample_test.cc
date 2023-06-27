@@ -3,7 +3,6 @@
 
 #include "../src/sample/sample.hh"
 
-
 namespace SampleTest {
 TEST(sum_unit_test, test_case1) {
   const int a = 3, b = 4;

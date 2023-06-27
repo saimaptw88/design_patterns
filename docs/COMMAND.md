@@ -11,6 +11,8 @@ or
 ``` docker-compose exec dev ../bash/cpplint.sh```
 or
 ``` docker-compose exec dev cpplint ../src/main.cc ```
+or
+``` docker-compose exec dev clang-format ../src/main.cc```
 
 ## UNIT TEST TOOL
 ``` docker-compose exec dev ctest --verbose```
