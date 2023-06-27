@@ -1,10 +1,8 @@
 // Copyright 2023 @saito
 #include <iostream>
-
 #include <boost/array.hpp>
 
 #include "../src/sample/sample.hh"
-
 
 int main() {
   constexpr uint8_t kN = 4;
