@@ -55,4 +55,3 @@ jobs:
        with:
          additional-packages: font-fira-code
          doxyfile-path: .
-         working-directory: 'docs/doxygen'
