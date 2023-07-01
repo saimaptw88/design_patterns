@@ -12,11 +12,11 @@ jobs:
      - name: Setup python
        uses: actions/setup-python@v2
 
-     - name: Setup lint
+     - name: Install Cpplint
        run: |
          pip3 install cpplint
 
-     - name: Setup Test
+     - name: Install Google Test
        run: |
          GOOGLE_TEST_VERSION=1.12.0
          curl -OL https://github.com/google/googletest/archive/release-${GOOGLE_TEST_VERSION}.tar.gz \
@@ -32,20 +32,32 @@ jobs:
      - name: Install boost
        run: sudo apt-get update && sudo apt-get install -yq libboost-all-dev
 
-     - name: Build
+     - name: Build my C++ code
        run: |
          mkdir build \
          && cd build \
          && cmake .. \
          && make
 
-     - name: Cpp Lint
+     - name: Execute Cpplint
        run: |
          cd src \
          && cpplint --recursive . \
          && cd ../
 
-     - name: Google Test
+     - name: Execute Google Test
        run: |
          cd build \
          && ctest --verbose
+
+     - name: Update doxygen
+       uses: mattnotmitt/doxygen-action@v1.9.5
+       with:
+         doxyfile-path: './Doxyfile'
+         enable-latex: false
+
+     - name: Deply doxygen
+       uses: JamesIves/github-pages-deploy-action@v4
+       with:
+         folder: ./docs/doxygen
+         ssh-key: ${{ secrets.DOXYGEN_DEPLOYMENT_KEY }}
