@@ -53,6 +53,5 @@ jobs:
      - name: Update doxygen
        uses: mattnotmitt/doxygen-action@v1.9.5
        with:
-         additional-packages: font-fira-code
          doxyfile-path: './Doxyfile'
          enable-latex: false
