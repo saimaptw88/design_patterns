@@ -55,3 +55,8 @@ jobs:
        with:
          doxyfile-path: './Doxyfile'
          enable-latex: false
+
+     - name: Deply doxygen
+       uses: JamesIves/github-pages-deploy-action@v4
+       with:
+         folder: ./docs/doxygen
