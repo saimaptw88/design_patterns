@@ -52,7 +52,8 @@ jobs:
 
      - name: Update doxygen
        uses: mattnotmitt/doxygen-action@v1.9.5
+       run: pwd
        with:
          additional-packages: font-fira-code
          doxyfile-path: .
-         working-directory: "src/docs/doxygen"
+         working-directory: "/design_pattern/docs/doxygen"
