@@ -54,6 +54,7 @@ jobs:
        uses: mattnotmitt/doxygen-action@v1.9.5
        with:
          doxyfile-path: './Doxyfile'
+         working-directory: './docs/doxygen'
          enable-latex: false
 
      - name: Deploy Doxygen
