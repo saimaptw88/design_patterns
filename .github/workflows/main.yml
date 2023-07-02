@@ -50,13 +50,13 @@ jobs:
          cd build \
          && ctest --verbose
 
-     - name: Update doxygen
+     - name: Build Doxygen
        uses: mattnotmitt/doxygen-action@v1.9.5
        with:
          doxyfile-path: './Doxyfile'
          enable-latex: false
 
-     - name: Deploy doxygen
+     - name: Deploy Doxygen
        uses: JamesIves/github-pages-deploy-action@v4
        with:
          folder: ./docs/doxygen/html
