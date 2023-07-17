@@ -38,6 +38,39 @@ void ClientCode(std::unique_ptr<Creator> creator) {
             << std::endl;
 }
 
+namespace Example {
+std::string Track::deliver() const {
+  return "Deliver by Track";
+}
+
+std::string Ship::deliver() const {
+  return "Deliver by Ship";
+}
+
+std::string AirPlane::deliver() const {
+  return "Deliver by Airplane";
+}
+
+void Logistics::send() const {
+  Transport* transport = this->createTransport();
+  std::cout << transport->deliver() << std::endl;
+
+  delete transport;
+}
+
+Transport* LoadLogistics::createTransport() const {
+  return new Track;
+}
+
+Transport* SeaLogistics::createTransport() const {
+  return new Ship;
+}
+
+Transport* SkyLogistics::createTransport() const {
+  return new AirPlane;
+}
+};  // namespace Example
+
 void execute() {
   std::cout << "****** Factory Method *****" << std::endl;
   std::cout << "App: Launched with the ConcreteCreator1."
@@ -56,11 +89,12 @@ void execute() {
 
   std::cout << std::endl;
 
-  using namespace example;
-  std::unique_ptr<Logistics> log;
-  log = std::make_unique<RoadLogistics>();
-  log->factory_method();
-  log->delivery();
-  log->message();
+  Example::LoadLogistics load;
+  Example::SeaLogistics sea;
+  Example::SkyLogistics sky;
+
+  load.send();
+  sea.send();
+  sky.send();
 }
 }  // namespace factory_method

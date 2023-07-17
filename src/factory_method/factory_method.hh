@@ -83,121 +83,52 @@ void ClientCode(std::unique_ptr<Creator>);
  * @brief Example to help understand this design pattern
  * @details Design transport
 */
-namespace example {
+
+namespace Example {
 class Transport {
  public:
-  enum class Status : int {
-    done = 0,
-    wip,
-    waiting,
-    problem
-  };
-
-  virtual void deliver() = 0;
-  virtual std::string send_message() const = 0;
-  virtual ~Transport() {}
-
-  Status status() const {
-    return this->status_;
-  }
-
-  std::string address() {
-    return this->address_;
-  }
-
-  Transport(const std::string& address) :
-    address_(address), status_(Status::waiting) {}
-
- protected:
-  std::string address_;
-  Status status_;
+  virtual std::string deliver() const = 0;
+  virtual ~Transport() {};
 };
 
-class Truck : public Transport {
+class Track : public Transport {
  public:
-  void deliver() override {
-    this->status_ = Status::problem;
-    std::cout << "Deliver on road with truck." << std::endl;
-  }
-  std::string send_message() const override {
-    return "Some problems occure on the road.";
-  }
-
-  std::string phone_number() const {
-    return this->phone_number_;
-  }
-
-  Truck(const std::string&address, const std::string&phone_number) :
-    Transport(address), phone_number_(phone_number) {}
-
- private:
-  std::string phone_number_;
+  std::string deliver() const override;
 };
 
 class Ship : public Transport {
  public:
-  void deliver() override {
-    this->status_ = Status::wip;
-    std::cout << "Deliver on road with ship." << std::endl;
-  }
+  std::string deliver() const override;
+};
 
-  std::string send_message() const override {
-    return "Sea is good condition.";
-  }
-
-  std::string country() {
-    return this->country_;
-  }
-
-  std::string port() {
-    return this->port_;
-  }
-
-  Ship(const std::string& address, const std::string& country, const std::string& port) :
-    Transport(address), country_(country), port_(port) {}
-
- private:
-  std::string country_;
-  std::string port_;
+class AirPlane : public Transport {
+ public:
+  std::string deliver() const override;
 };
 
 class Logistics {
  public:
-  virtual void factory_method() = 0;
-  virtual ~Logistics() {}
+  virtual Transport* createTransport() const = 0;
+  virtual ~Logistics() {};
 
-  void delivery() {
-    this->transport_->deliver();
-  }
-  void message() {
-    auto message = this->transport_->send_message();
-    auto status = this->transport_->status();
-    auto address = this->transport_->address();
-
-    std::cout << "Delivery to " << address << std::endl;
-    std::cout << "NOW STATUS: " << (int)status << std::endl;
-    std::cout << message << std::endl;
-    std::cout << std::endl;
-  }
-
- protected:
-  std::unique_ptr<Transport> transport_;
+  void send() const;
 };
 
-class RoadLogistics : public Logistics {
+class LoadLogistics : public Logistics {
  public:
-  void factory_method() override {
-    this->transport_ = std::make_unique<Truck>("tokyo", "xxx-xxx-xxx");
-  }
+  Transport* createTransport() const override;
 };
 
 class SeaLogistics : public Logistics {
  public:
-  void factory_method() override {
-    this->transport_ = std::make_unique<Ship>("tokyo", "Japan", "Yaezu");
-  }
+  Transport* createTransport() const override;
 };
-};  // namespace example
+
+class SkyLogistics : public Logistics {
+ public:
+  Transport* createTransport() const override;
+};
+};  // namespace Example
 
 /**
  * @brief Entry point from main.cc
