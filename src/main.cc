@@ -3,6 +3,7 @@
 #include <boost/array.hpp>
 
 #include "../src/sample/sample.hh"
+#include "factory_method/factory_method.hh"
 
 int main() {
   constexpr uint8_t kN = 4;
@@ -14,6 +15,8 @@ int main() {
 
   const int kSum = Sample::sum(3, 4);
   std::cout << kSum << std::endl;
+
+  factory_method::execute();
 
   return 0;
 }
