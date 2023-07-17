@@ -52,22 +52,20 @@ std::string AirPlane::deliver() const {
 }
 
 void Logistics::send() const {
-  Transport* transport = this->createTransport();
+  std::unique_ptr<Transport> transport = this->createTransport();
   std::cout << transport->deliver() << std::endl;
-
-  delete transport;
 }
 
-Transport* LoadLogistics::createTransport() const {
-  return new Track;
+std::unique_ptr<Transport> LoadLogistics::createTransport() const {
+  return std::make_unique<Track>();
 }
 
-Transport* SeaLogistics::createTransport() const {
-  return new Ship;
+std::unique_ptr<Transport> SeaLogistics::createTransport() const {
+  return std::make_unique<Ship>();
 }
 
-Transport* SkyLogistics::createTransport() const {
-  return new AirPlane;
+std::unique_ptr<Transport> SkyLogistics::createTransport() const {
+  return std::make_unique<AirPlane>();
 }
 };  // namespace Example
 

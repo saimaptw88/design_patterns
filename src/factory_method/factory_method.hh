@@ -108,7 +108,7 @@ class AirPlane : public Transport {
 
 class Logistics {
  public:
-  virtual Transport* createTransport() const = 0;
+  virtual std::unique_ptr<Transport> createTransport() const = 0;
   virtual ~Logistics() {};
 
   void send() const;
@@ -116,17 +116,17 @@ class Logistics {
 
 class LoadLogistics : public Logistics {
  public:
-  Transport* createTransport() const override;
+  std::unique_ptr<Transport> createTransport() const override;
 };
 
 class SeaLogistics : public Logistics {
  public:
-  Transport* createTransport() const override;
+  std::unique_ptr<Transport> createTransport() const override;
 };
 
 class SkyLogistics : public Logistics {
  public:
-  Transport* createTransport() const override;
+  std::unique_ptr<Transport> createTransport() const override;
 };
 };  // namespace Example
 
