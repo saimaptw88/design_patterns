@@ -88,7 +88,7 @@ namespace Example {
 class Transport {
  public:
   virtual std::string deliver() const = 0;
-  virtual ~Transport() {};
+  virtual ~Transport() {}
 };
 
 class Track : public Transport {
@@ -109,7 +109,7 @@ class AirPlane : public Transport {
 class Logistics {
  public:
   virtual std::unique_ptr<Transport> createTransport() const = 0;
-  virtual ~Logistics() {};
+  virtual ~Logistics() {}
 
   void send() const;
 };
